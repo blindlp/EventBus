@@ -1,7 +1,10 @@
 package gt.com.irc.eventbus.main;
 
+import com.raizlabs.android.dbflow.sql.language.Condition;
+
 import org.greenrobot.eventbus.Subscribe;
 
+import gt.com.irc.eventbus.Event;
 import gt.com.irc.eventbus.lib.base.EventBus;
 
 public class MainPresenterImpl implements MainPresenter {
@@ -29,12 +32,51 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     @Subscribe
-    public void onEvent(int number) {
-        this.view.number(number);
+    public void onEvent(Event event) {
+        if (event.getError() != null && !event.getError().isEmpty()) {
+            // TODO: mostrar error en la visa
+            this.view.showError(event.getError());
+
+
+        } else {
+            if (event.getMensaje() != null && !event.getMensaje().isEmpty()) {
+                // TODO: Mostrar mensaje en la vida.
+                this.view.showMessage(event.getMensaje());
+            }
+            switch (event.getTipo()) {
+                case Event.toNumber:
+                    this.view.toNumber(Integer.parseInt(event.getObj().toString()));
+                    break;
+                case Event.compare:
+                    this.view.comparativo(Integer.parseInt(event.getObj().toString()), Integer.parseInt(event.getObj2().toString()));
+                    break;
+                case Event.display:
+                    this.view.displayNumber(Integer.parseInt(event.getObj().toString()));
+                    break;
+                default:
+                    //TODO: Mostrar mensaje de evento invalido en la vista
+                    break;
+
+            }
+        }
+
+
     }
 
     @Override
-    public void number(int number) {
-        this.model.number(number);
+    public void toNumber(int number) {
+        this.model.toNumber(number);
+    }
+
+
+    @Override
+    public void comparativo(int numeroUno, int numeroDos) {
+
+        this.model.comparativo(numeroUno, numeroDos);
+    }
+
+    @Override
+    public void displayNumber(int number) {
+        this.model.displayNumbers(number);
     }
 }

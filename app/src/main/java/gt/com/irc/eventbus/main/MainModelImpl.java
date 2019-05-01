@@ -1,5 +1,6 @@
 package gt.com.irc.eventbus.main;
 
+import gt.com.irc.eventbus.Event;
 import gt.com.irc.eventbus.lib.base.EventBus;
 
 public class MainModelImpl implements MainModel {
@@ -11,7 +12,22 @@ public class MainModelImpl implements MainModel {
     }
 
     @Override
-    public void number(int number) {
+    public void toNumber(int number) {
+        //bus.post(number);
 
+       // bus.post(new Event(Event.toNumber, null,"Mensaje de error", number));
+        bus.post(new Event(Event.toNumber, number));
+    }
+
+    @Override
+    public void comparativo(int numeroUno, int numeroDos) {
+
+        bus.post(new Event(Event.compare , numeroUno,numeroDos));
+
+    }
+
+    @Override
+    public void displayNumbers(int number) {
+        bus.post(new Event(Event.display, number));
     }
 }
