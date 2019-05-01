@@ -7,6 +7,8 @@ public class Event implements Serializable {
     public static final int toNumber = 1;
     public static final int compare = 2;
     public static final int display =3;
+    public static final int toUpper =4;
+    public static final int sumaNumeros =5;
 
     private int tipo; // tipo
     private String mensaje; // notificar algo

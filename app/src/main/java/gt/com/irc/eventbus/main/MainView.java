@@ -6,5 +6,7 @@ public interface MainView {
     void showMessage(String message);
     void comparativo(int numeroUno, int numeroDos);
     void displayNumber(int number);
+    void toUpper(String text);
+    void sumaNumeros(int numero);
 
 }

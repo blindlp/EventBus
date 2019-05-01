@@ -30,4 +30,14 @@ public class MainModelImpl implements MainModel {
     public void displayNumbers(int number) {
         bus.post(new Event(Event.display, number));
     }
+
+    @Override
+    public void toUpper(String text) {
+    bus.post(new Event(Event.toUpper,text));
+    }
+
+    @Override
+    public void sumaNumeros(int numeros) {
+    bus.post(new Event(Event.sumaNumeros,numeros));
+    }
 }

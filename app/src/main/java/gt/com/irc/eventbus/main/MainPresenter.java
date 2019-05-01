@@ -9,4 +9,6 @@ public interface MainPresenter {
     void toNumber(int number);
     void comparativo(int numeroUno, int numeroDos);
     void displayNumber(int number); // despliega los numeros hasta
+    void toUpper(String text);
+    void sumaNumeros(int numeros);
 }

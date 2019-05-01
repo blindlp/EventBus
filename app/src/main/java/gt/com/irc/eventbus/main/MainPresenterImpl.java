@@ -53,6 +53,12 @@ public class MainPresenterImpl implements MainPresenter {
                 case Event.display:
                     this.view.displayNumber(Integer.parseInt(event.getObj().toString()));
                     break;
+                case Event.toUpper:
+                    this.view.toUpper(event.getObj().toString());
+                    break;
+                case Event.sumaNumeros:
+                    this.view.sumaNumeros(Integer.parseInt(event.getObj().toString()));
+                    break;
                 default:
                     //TODO: Mostrar mensaje de evento invalido en la vista
                     break;
@@ -78,5 +84,15 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void displayNumber(int number) {
         this.model.displayNumbers(number);
+    }
+
+    @Override
+    public void toUpper(String text) {
+        this.model.toUpper(text);
+    }
+
+    @Override
+    public void sumaNumeros(int numeros) {
+        this.model.sumaNumeros(numeros);
     }
 }

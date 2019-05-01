@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.textTwo)
     TextView textTwo;
 
+    @BindView(R.id.toText)
+    TextView toText;
+
+    @BindView(R.id.textTree)
+    TextView textTree;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.toNumber(10);
         presenter.comparativo(10,20);
         presenter.displayNumber(10);
+        presenter.toUpper("demo");
+        presenter.sumaNumeros(3);
     }
 
 
@@ -93,6 +101,23 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
+    public void toUpper(String text) {
+        toText.setText(text.toUpperCase());
+    }
+
+    @Override
+    public void sumaNumeros(int numero) {
+        int i=1;
+        int total =0;
+
+        while(i<numero) {
+            total = total + numero;
+            i++;
+        }
+        textTree.setText(Integer.toString(total));
+    }
+
+    @Override
     public void showError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
@@ -101,4 +126,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void showMessage(String message) {
         // TODO: falta implementar el metodo de shackBar
     }
+
+
 }
