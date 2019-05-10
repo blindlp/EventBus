@@ -1,6 +1,7 @@
 package gt.com.irc.eventbus;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Event implements Serializable {
 
@@ -9,6 +10,7 @@ public class Event implements Serializable {
     public static final int display =3;
     public static final int toUpper =4;
     public static final int sumaNumeros =5;
+    public static final int arrayList =6;
 
     private int tipo; // tipo
     private String mensaje; // notificar algo
