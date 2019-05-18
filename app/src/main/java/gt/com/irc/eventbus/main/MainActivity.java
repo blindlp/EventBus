@@ -3,20 +3,30 @@ package gt.com.irc.eventbus.main;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import gt.com.irc.eventbus.App;
 import gt.com.irc.eventbus.R;
 import gt.com.irc.eventbus.lib.GreenRobotEventBus;
 import gt.com.irc.eventbus.lib.base.EventBus;
+import gt.com.irc.eventbus.lib.base.ImageLoader;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
+
+    @Inject
     MainPresenter presenter;
+
+    @Inject
+    ImageLoader loader;
 
 
     @BindView(R.id.container)
@@ -38,12 +48,20 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.textTree)
     TextView textTree;
 
+    @BindView(R.id.image)
+    ImageView image;
+
+
+    private App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        app = (App) getApplication();
+
         init();
         presenter.onCreate();
         presenter.toNumber(10);
@@ -51,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.displayNumber(10);
         presenter.toUpper("demo");
         presenter.sumaNumeros(3);
+
+        loader.load(image,"https://sites.google.com/site/kangarooz3d/home/Logos-partenaires-Google.png");
     }
 
 
@@ -61,9 +81,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void init() {
-        EventBus bus = new GreenRobotEventBus(org.greenrobot.eventbus.EventBus.getDefault());
-        MainModel model = new MainModelImpl(bus);
-        presenter = new MainPresenterImpl(model, this, bus);
+       // EventBus bus = new GreenRobotEventBus(org.greenrobot.eventbus.EventBus.getDefault());
+       // MainModel model = new MainModelImpl(bus);
+       //  presenter = new MainPresenterImpl(model, this, bus);
+        app.mainComponent(this).inject(this);
+
     }
 
     @Override
